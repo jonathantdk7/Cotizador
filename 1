@@ -1,0 +1,205 @@
+<?php
+$dist_images = get_template_directory_uri() . '/dist/images/';
+$registroBtn = get_field('buton_registro', 'option')
+
+?>
+
+<div class="simulator_header_wrap">
+    <div class="simulator_header">
+        <h6 class="modal-title">Simula tu adelanto</h6>
+        <button id="close_simulator" type="button" class="close" >
+            <span class="close-label">Cerrar</span> <span class="close-icon" aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+
+<div class="simulator_panel step_one">
+    <div class="simulator_content">
+        <div class="modal-body">
+            <div class="container">
+                <div class="row input-row">
+                    <div class="col-12">
+                        <span class="little_title">RUC de tu empresa</span> <span class="mandatory-field">*</span>
+                        <div class="input-group regular-input">
+                            <input type="text" id="ruc" class="form-control" placeholder="Escribe tu RUC">
+                        </div>
+                        <div class="error-message" id="ruc-error">
+                            <span>Debes ingresar un RUC válido para tu empresa.</span><br>
+                        </div>
+                    </div>
+                </div>
+                <div class="row input-row">
+                    <div class="col-12">
+                        <span class="little_title">Monto de la factura</span> <span class="mandatory-field">*</span>
+                        <div class="w-100 d-block d-sm-none"></div>
+                        <span class="d-block d-sm-none input_desc">Monto mínimo 3,000 soles o 1,000 USD</span>
+                        <div class="input-group">
+                            <div class="input-group-pre">
+                                <div class="input-group-text" id="currency-container">
+                                    <span id="soles-icon">S/.</span>
+                                </div>
+                            </div>
+                            <input type="text" class="form-control" id="amount" placeholder="Monto mínimo 3,000 soles o 1,000 USD" name="cost-simulator-amount" id="cost-simulator-amount">
+                            <div class="input-group-post">
+                                <div class="input-group-text pr-0">
+                                    <select class="form-control" id="currency">
+                                        <option>PEN</option>
+                                        <option>USD</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="error-message" id="amount-error">
+                            <span>Debes ingresar un monto válido.</span>
+                            <span id="low-amount-error">Monto menor al permitido</span>
+                            <span id="high-amount-error">Monto mayor al permitido</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row input-row days_credit">
+                    <div class="col-12">
+                        <span class="little_title">Días de crédito de la factura</span>
+                        <div class="center-align">
+                            <input type="radio" name="days" id="30days" value="30" checked />
+                            <label for="30days" class="simulator_label_days">
+                                <span class="big-label">30</span> <span class="small-label">días</span>
+                            </label>
+
+                            <input type="radio" name="days" id="45days" value="45" />
+                            <label for="45days" class="simulator_label_days">
+                                <span class="big-label">45</span> <span class="small-label">días</span>
+                            </label>
+
+                            <input type="radio" name="days" id="60days" value="60" />
+                            <label for="60days" class="simulator_label_days">
+                                <span class="big-label">60</span> <span class="small-label">días</span>
+                            </label>
+
+                            <input type="number" id="other-days" class="form-control" placeholder="Escribe aquí los días">
+                        </div>
+                        <div class="error-message" id="days-error">
+                            <span>Ingresa un número de días mayor a 30 y menor a 365</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row input-row">
+                    <div class="col-12">
+                        <span class="little_title">RUC de tu cliente (Únicamente RUC 20)</span> <span class="mandatory-field">*</span>
+                        <div class="w-100 d-block d-sm-none"></div>
+                        <span class="d-block d-sm-none input_desc">Escríbe el RUC de tu cliente para darte una cotización exacta</span>
+                        <div class="input-group regular-input">
+                            <input type="text" class="form-control" id="debtor-ruc" placeholder="Escribe el RUC de tu cliente, es decir de la empresa pagadora.">
+                        </div>
+                        <div class="error-message" id="debtor-ruc-error">
+                            <span>Debes ingresar un RUC válido para tu cliente</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row input-row">
+                    <div class="col-md-6">
+                        <span class="little_title">Tu correo</span> <span class="mandatory-field">*</span><br>
+                        <span class="input_desc">Te enviaremos la cotización a tu correo</span>
+                        <div class="input-group regular-input">
+                            <input id="email" type="text" class="form-control" placeholder="tunombe@tuempresa.pe">
+                        </div>
+                        <div class="error-message" id="invalid-email-error">
+                            <span>Debes ingresar un correo que sea válido</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="little_title">Tu teléfono</span> <span class="mandatory-field">*</span><br>
+                        <span class="input_desc">Te daremos atención prioritaria</span>
+                        <div class="input-group regular-input">
+                            <input type="text" id="phone" class="form-control" placeholder="01 739 7913 o 997 123 456">
+                        </div>
+                        <div class="error-message" id="invalid-phone">
+                            <span>Debes ingresar un teléfono que sea válido</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container mt-2">
+                <div class="terms-container">
+                    <input type="checkbox" name="terms" id="terms" value="activate"> <span>Acepto los</span> <a class="blue-text" target="_blank" href="https://facturedo.pe/terminos-y-condiciones/">términos y condiciones</a> de uso.
+                    <div class="error-message" id="terms-error">
+                        <span>Debes aceptar los términos y condiciones de uso</span><br>
+                    </div>
+                </div>
+            </div>
+            <div class="container mt-4 d-flex justify-content-center">
+                <button type="button" id="quote-button" class="btn btn-primary" tabindex="0">Cotizar mi factura</button>
+            </div>
+        </div>
+        <div class="w-100 pt-40">&nbsp;</div>
+    </div>
+</div>
+
+<div class="simulator_panel step_two">
+    <div class="simulator_content">
+        <div class="modal-body">
+            <div class="container result-container">
+                <div class="row result-header">
+                    <div class="col-12 text-center">
+                        <img src="<?= $dist_images; ?>Icon/Confirm.svg">
+                    </div>
+                </div>
+                <div class="row result-header">
+                    <div class="col-12">
+                        <span class="title">Cotización envíada</span>
+                    </div>
+                </div>
+                <div class="row result-header sub-header">
+                    <div class="col-12">
+                        <p class="mb-0">
+                            Hemos enviado la cotización a tu correo, <a class="register-text app-anchor" href="<?php echo $registroBtn['link']; ?>">regístrate ahora</a> para adelantar tu factura en unos cuantos clics
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="container result-container-content mt-5">
+                <div class="row result-row">
+                    <div class="col-7 d-flex">
+                        <h6 class="mt-auto">Monto de tu factura</h6>
+                    </div>
+                    <div class="result-value result-col-amount col-5">
+                        <span class="currency">#</span><br>
+                        <span class="value">#</span>
+                    </div>
+                </div>
+                <div class="row result-row">
+                    <div class="col-7">
+                        <h6>Días de crédito de la factura</h6>
+                    </div>
+                    <div class="result-value result-col-days col-5">
+                        <span>#</span>
+                    </div>
+                </div>
+                <div class="row result-row">
+                    <div class="col-7">
+                        <h6>RUC de tu cliente (empresa pagadora)</h6>
+                    </div>
+                    <div class="result-value result-col-ruc col-5">
+                        <span>#</span>
+                    </div>
+                </div>
+                <div class="row result-row">
+                    <div class="col-sm-4">
+                        <h6>Tu correo</h6>
+                    </div>
+                    <div class="result-value result-col-email col-sm-8 text-left text-sm-right">
+                        <span>#</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container result-container-content result-footer">
+            <div class="d-flex justify-content-between pt-5 pb-5">
+                <span id="requote-button">Volver a cotizar</span>
+                <a id="register-button" class="btn btn-primary app-anchor" target="_blank" href="<?php echo $registroBtn['link']; ?>">Regístrarme</a>
+            </div>
+        </div>
+        <div class="w-100 pt-40">&nbsp;</div>
+    </div>
+</div>
+
+<div id="simulator_bg"></div>
